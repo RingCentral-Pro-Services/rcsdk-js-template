@@ -1,0 +1,11 @@
+{
+  "name": "rcsdk-js-template",
+  "version": "1.0.0",
+  "description": "Used as a boiler plate for writing node js applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
