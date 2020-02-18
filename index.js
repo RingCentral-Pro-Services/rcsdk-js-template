@@ -7,9 +7,6 @@ rcsdk.platform().login({
     password: process.env.RINGCENTRAL_PASSWORD
 })
     .then(() => {
-        logger.info("Logged in to RingCentral successfully")
-    })
-    .then(() => {
         // kick off the application. all other logic is handled from main()
         main()
     })
@@ -19,5 +16,14 @@ rcsdk.platform().login({
 
 
 async function main() {
-    
+    rcsdk.platform().get(`/restapi/v1.0/account/~`)
+        .then(res => {
+            return res.json()
+        })
+        .then(res => {
+            logger.info(res)
+        })
+        .catch(e => {
+            logger.error("Issue logging in: ", e)
+        })
 }
