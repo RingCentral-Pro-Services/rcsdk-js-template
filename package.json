@@ -6,6 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "John Celoria john.celoria@ringcentral.com",
+  "license": "ISC",
+  "dependencies": {
+    "@ringcentral/sdk": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  }
 }
