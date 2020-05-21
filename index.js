@@ -1,11 +1,13 @@
 const rcsdk = require('./lib/rc-sdk')
 const logger = require('./lib/logger')
 
-rcsdk.platform().login({
-    username: process.env.RINGCENTRAL_USERNAME,
-    extension: process.env.RINGCENTRAL_EXTENSION,
-    password: process.env.RINGCENTRAL_PASSWORD
-})
+rcsdk
+    .platform()
+    .login({
+        username: process.env.RINGCENTRAL_USERNAME,
+        extension: process.env.RINGCENTRAL_EXTENSION,
+        password: process.env.RINGCENTRAL_PASSWORD
+    })
     .then(() => {
         // kick off the application. all other logic is handled from main()
         main()
@@ -16,7 +18,9 @@ rcsdk.platform().login({
 
 
 async function main() {
-    rcsdk.platform().get(`/restapi/v1.0/account/~`)
+    rcsdk
+        .platform()
+        .get(`/restapi/v1.0/account/~`)
         .then(res => {
             return res.json()
         })
