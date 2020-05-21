@@ -1,5 +1,6 @@
 const rcsdk = require('./lib/rc-sdk')
 const logger = require('./lib/logger')
+const Subscriptions = require('@ringcentral/subscriptions').Subscriptions;
 
 rcsdk
     .platform()
@@ -16,8 +17,13 @@ rcsdk
         logger.error("Issue logging in: ", e)
     })
 
+const subscriptions = new Subscriptions({
+    sdk: rcsdk
+});
+
 
 async function main() {
+    // reference: https://developers.ringcentral.com/api-reference/Company/readAccountInfo
     rcsdk
         .platform()
         .get(`/restapi/v1.0/account/~`)
@@ -30,4 +36,19 @@ async function main() {
         .catch(e => {
             logger.error("Issue logging in: ", e)
         })
+
+    var subscription = subscriptions.createSubscription({
+        pollInterval: 100
+    });
+
+    // if you send an SMS after this is created, you will see the inbound message and body
+    subscription.on(subscription.events.notification, function(msg) {
+        console.log(msg, msg.body);
+    });
+
+    // reference: https://developers.ringcentral.com/api-reference/Instant-Message-Event
+    subscription
+        .setEventFilters(['/restapi/v1.0/account/~/extension/~/message-store/instant?type=SMS']) // a list of server-side events
+        .register()
+
 }
