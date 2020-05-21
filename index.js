@@ -37,13 +37,35 @@ async function main() {
             logger.error("Issue logging in: ", e)
         })
 
+    // reference: https://developers.ringcentral.com/api-reference/SMS/createSMSMessage
+    rcsdk
+        .platform()
+        .post('/restapi/v1.0/account/~/extension/~/sms', {
+            from: {
+                phoneNumber: 'Your-RC-Number'
+            },
+            to: [{
+                phoneNumber: 'Recipient-Phone-Number'
+            }, ],
+            text: "Here's the outbound!"
+        })
+        .then(res => {
+            return res.json()
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(e => {
+            console.error(e)
+        })
+
     var subscription = subscriptions.createSubscription({
         pollInterval: 100
     });
 
     // if you send an SMS after this is created, you will see the inbound message and body
     subscription.on(subscription.events.notification, function(msg) {
-        console.log(msg, msg.body);
+        console.log(msg.body)
     });
 
     // reference: https://developers.ringcentral.com/api-reference/Instant-Message-Event
