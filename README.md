@@ -1,6 +1,9 @@
 # About
 This application repository gives a starting point for node js application. 
 
+## Installation
+Run `npm install` from application root. 
+
 ## Considerations
 It includes the RingCentral JS SDK. Sets up the login for it using a `.env` file (copy the `env_example` file, fill it in and rename to `.env`). 
 
