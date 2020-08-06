@@ -14,6 +14,7 @@
     "dotenv": "^8.2.0",
     "node-localstorage": "^2.1.6",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.2"
+    "winston-daily-rotate-file": "^4.4.2",
+    "xlsx": "^0.16.5"
   }
 }

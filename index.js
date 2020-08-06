@@ -1,6 +1,7 @@
 const rcsdk = require('./lib/rc-sdk')
 const logger = require('./lib/logger')
 const Subscriptions = require('@ringcentral/subscriptions').Subscriptions;
+const parseExcelSheet = require('./lib/sheets')
 
 rcsdk
     .platform()
@@ -23,6 +24,13 @@ const subscriptions = new Subscriptions({
 
 
 async function main() {
+    let excelData = await parseExcelSheet('./Example\ Sheet.xlsx')
+        .catch(e => {
+            console.error(e)
+        })
+
+    console.log(excelData)
+
     // reference: https://developers.ringcentral.com/api-reference/Company/readAccountInfo
     rcsdk
         .platform()
@@ -46,7 +54,7 @@ async function main() {
             },
             to: [{
                 phoneNumber: 'Recipient-Phone-Number'
-            }, ],
+            },],
             text: "Here's the outbound!"
         })
         .then(res => {
@@ -64,7 +72,7 @@ async function main() {
     });
 
     // if you send an SMS after this is created, you will see the inbound message and body
-    subscription.on(subscription.events.notification, function(msg) {
+    subscription.on(subscription.events.notification, function (msg) {
         console.log(msg.body)
     });
 
