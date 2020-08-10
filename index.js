@@ -26,10 +26,10 @@ const subscriptions = new Subscriptions({
 async function main() {
     let excelData = await parseExcelSheet('./Example\ Sheet.xlsx')
         .catch(e => {
-            console.error(e)
+            logger.error(e)
         })
 
-    console.log(excelData)
+    logger.info(excelData)
 
     // reference: https://developers.ringcentral.com/api-reference/Company/readAccountInfo
     rcsdk
@@ -61,10 +61,10 @@ async function main() {
             return res.json()
         })
         .then(res => {
-            console.log(res)
+            logger.info(res)
         })
         .catch(e => {
-            console.error(e)
+            logger.error(e)
         })
 
     var subscription = subscriptions.createSubscription({
@@ -73,7 +73,7 @@ async function main() {
 
     // if you send an SMS after this is created, you will see the inbound message and body
     subscription.on(subscription.events.notification, function (msg) {
-        console.log(msg.body)
+        logger.info(msg.body)
     });
 
     // reference: https://developers.ringcentral.com/api-reference/Instant-Message-Event
