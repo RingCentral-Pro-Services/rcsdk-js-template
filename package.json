@@ -12,7 +12,7 @@
     "@ringcentral/sdk": "^4.1.0",
     "@ringcentral/subscriptions": "^4.1.0",
     "dotenv": "^8.2.0",
-    "log4js": "^6.3.0",
+    "log4js": "^6.4.0",
     "moment": "^2.29.1",
     "node-localstorage": "^2.1.6",
     "winston-daily-rotate-file": "^4.4.2",
